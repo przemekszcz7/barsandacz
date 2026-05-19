@@ -74,7 +74,7 @@ export default function App() {
     <div className="min-h-screen bg-sand-100 text-marine-900 font-sans selection:bg-sea-100 overflow-x-hidden">
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-sand-100/90 backdrop-blur-md border-b border-sand-200">
-        <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -89,7 +89,7 @@ export default function App() {
             </div>
           </motion.div>
           
-          <div className="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest text-marine-900">
+          <div className="hidden md:flex items-center gap-8 text-sm font-bold uppercase tracking-widest text-marine-900">
             {["Galeria", "Godziny", "Opinie", "Kontakt"].map((item) => (
               <motion.a 
                 key={item}
@@ -147,7 +147,8 @@ export default function App() {
               <a 
                 href={FB_LINK}
                 target="_blank"
-                className="bg-[#1877F2] text-white py-4 rounded-2xl flex items-center justify-center gap-2 font-bold shadow-xl shadow-[#1877F2]/20 text-marine-900"
+                rel="noreferrer"
+                className="bg-[#1877F2] text-white py-4 rounded-2xl flex items-center justify-center gap-2 font-bold shadow-xl shadow-[#1877F2]/20"
               >
                 <Facebook className="w-5 h-5 text-white" /> Facebook
               </a>
@@ -198,10 +199,10 @@ export default function App() {
               
               <motion.h1 
                 variants={fadeInUp}
-                className="font-serif text-6xl md:text-[9rem] font-bold mb-8 leading-[0.9] py-4"
+                className="font-serif text-4xl sm:text-6xl md:text-8xl font-bold mb-10 leading-tight py-4"
               >
-                Morski Klimat <br/>
-                <span className="italic text-sand-200">nad Pilicą</span>
+                Bar <br/>
+                <span className="italic text-sea-500">Sandacz</span>
               </motion.h1>
 
               <motion.p 
@@ -238,12 +239,12 @@ export default function App() {
 
         {/* Gallery Section */}
         <section id="galeria" className="py-32 max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-20 gap-8">
             <motion.div 
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="max-w-xl"
+              className="max-w-xl text-center md:text-left"
             >
               <h2 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-marine-900 leading-tight">
                 Złapane w sieć <br/>
@@ -295,29 +296,29 @@ export default function App() {
         </section>
 
         {/* Hours & Atmosphere Section */}
-        <section id="godziny" className="py-32 bg-marine-900 text-white relative overflow-hidden">
+        <section id="godziny" className="py-24 md:py-32 bg-marine-900 text-white relative overflow-hidden">
           {/* Subtle Background Pattern */}
           <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#4A90E2 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
           
-          <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-24 relative z-10">
+          <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-16 md:gap-24 relative z-10">
             <motion.div 
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1 }}
               viewport={{ once: true }}
-              className="lg:w-1/2 relative"
+              className="lg:w-1/2 relative w-full"
             >
               <img 
                 src={IMAGES[2]} 
-                className="rounded-[4rem] w-full h-[700px] object-cover shadow-3xl border-[20px] border-white/5"
+                className="rounded-[2.5rem] md:rounded-[4rem] w-full h-[400px] md:h-[700px] object-cover shadow-3xl border-[10px] md:border-[20px] border-white/5"
                 alt="Wystrój Bar Sandacz"
               />
               <motion.div 
-                animate={{ y: [0, -20, 0] }}
+                animate={{ y: [0, -10, 0] }}
                 transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-                className="absolute -bottom-10 -right-10 bg-sea-500 p-10 rounded-full shadow-2xl border-8 border-marine-900"
+                className="absolute -bottom-6 -right-6 md:-bottom-10 md:-right-10 bg-sea-500 p-6 md:p-10 rounded-full shadow-2xl border-4 md:border-8 border-marine-900"
               >
-                <Waves className="w-16 h-16 text-white" />
+                <Waves className="w-8 h-8 md:w-16 md:h-16 text-white" />
               </motion.div>
             </motion.div>
             
@@ -326,45 +327,39 @@ export default function App() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="lg:w-1/2"
+              className="lg:w-1/2 w-full"
             >
               <div className="max-w-xl">
-                <h2 className="font-serif text-5xl md:text-7xl font-bold mb-12 text-white">
+                <h2 className="font-serif text-4xl sm:text-5xl md:text-7xl font-bold mb-8 md:mb-12 text-white">
                   Port Otwarty <br/>
                   <span className="text-sea-500 italic">Dla Ciebie</span>
                 </h2>
                 
-                <motion.div 
-                  variants={staggerContainer}
-                  initial="initial"
-                  whileInView="animate"
-                  viewport={{ once: true }}
-                  className="space-y-6"
-                >
+                <div className="space-y-4 md:space-y-6">
                   {hours.map((item, idx) => (
                     <motion.div 
                       key={idx} 
                       variants={fadeInUp}
-                      className={`flex justify-between items-center py-5 border-b border-white/10 ${item.closed ? 'opacity-30' : ''}`}
+                      className={`flex justify-between items-center py-4 md:py-5 border-b border-white/10 ${item.closed ? 'opacity-40' : ''}`}
                     >
-                      <span className="text-xl font-bold uppercase tracking-[0.2em]">{item.day}</span>
-                      <div className="flex items-center gap-4">
-                        {!item.closed && <Clock className="w-5 h-5 text-sea-500" />}
-                        <span className={`text-2xl font-black ${!item.closed ? 'text-sea-500' : 'text-white'}`}>
+                      <span className="text-lg md:text-xl font-bold uppercase tracking-[0.2em] text-white">{item.day}</span>
+                      <div className="flex items-center gap-2 md:gap-4">
+                        {!item.closed && <Clock className="w-4 h-4 md:w-5 md:h-5 text-sea-500" />}
+                        <span className={`text-xl md:text-2xl font-black ${!item.closed ? 'text-sea-500' : 'text-white'}`}>
                           {item.time}
                         </span>
                       </div>
                     </motion.div>
                   ))}
-                </motion.div>
+                </div>
                 
-                <div className="mt-16 p-8 bg-white/5 rounded-3xl border border-white/10 flex items-start gap-6">
-                  <div className="bg-sea-500/20 p-4 rounded-xl">
-                    <MapPin className="text-sea-500 w-8 h-8" />
+                <div className="mt-12 md:mt-16 p-6 md:p-8 bg-white/5 rounded-3xl border border-white/10 flex items-start gap-4 md:gap-6">
+                  <div className="bg-sea-500/20 p-3 md:p-4 rounded-xl shrink-0">
+                    <MapPin className="text-sea-500 w-6 h-6 md:w-8 md:h-8" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-xl mb-2 text-white">Nasza Przystań</h4>
-                    <p className="text-white/60 leading-relaxed text-lg">
+                    <h4 className="font-bold text-lg md:text-xl mb-1 md:mb-2 text-white">Nasza Przystań</h4>
+                    <p className="text-white/60 leading-relaxed text-base md:text-lg">
                       Inowłódz, Polska.<br/>
                       Tuż nad brzegiem Pilicy, w sercu natury.
                     </p>
@@ -393,7 +388,7 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="font-serif text-5xl md:text-8xl font-bold mb-10 text-marine-900 leading-tight italic"
+              className="font-serif text-4xl sm:text-5xl md:text-8xl font-bold mb-10 text-marine-900 leading-tight italic"
             >
               "Najlepszy Sandacz <br/>jakiego jadłem!"
             </motion.h2>
@@ -403,7 +398,7 @@ export default function App() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-2xl text-marine-700/80 mb-16 max-w-3xl mx-auto font-medium italic leading-relaxed"
+              className="text-xl sm:text-2xl text-marine-700/80 mb-16 max-w-3xl mx-auto font-medium italic leading-relaxed"
             >
               "Wspaniałe miejsce z duszą. Ryba świeża, chrupiąca i idealnie doprawiona. Atmosfera sprawia, że czujesz się jak u starych dobrych znajomych. Polecam każdemu, kto odwiedza Inowłódz!"
             </motion.p>
@@ -414,7 +409,7 @@ export default function App() {
               rel="noreferrer"
               whileHover={{ scale: 1.05, y: -5 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-4 bg-marine-900 text-white px-12 py-6 rounded-full font-black text-lg uppercase tracking-widest hover:bg-marine-800 transition-all shadow-3xl text-white"
+              className="inline-flex items-center gap-4 bg-marine-900 text-white px-8 sm:px-12 py-5 sm:py-6 rounded-full font-black text-base sm:text-lg uppercase tracking-widest hover:bg-marine-800 transition-all shadow-3xl"
             >
               Dołącz do załogi na Facebooku
               <ChevronRight className="w-6 h-6 text-sea-500" />
@@ -423,7 +418,7 @@ export default function App() {
         </section>
 
         {/* Contact/Map Section */}
-        <section id="kontakt" className="pt-24 pb-48 bg-marine-900 text-white relative overflow-hidden">
+        <section id="kontakt" className="py-24 bg-marine-900 text-white relative overflow-hidden">
           {/* Animated Wave Background Top */}
           <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0]">
             <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-[200%] h-[120px] text-sand-100 fill-current animate-wave">
@@ -431,8 +426,8 @@ export default function App() {
             </svg>
           </div>
 
-          <div className="max-w-7xl mx-auto px-4 mt-32 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
+          <div className="max-w-7xl mx-auto px-6 mt-12 md:mt-20 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
               <motion.div 
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -442,46 +437,47 @@ export default function App() {
                   <div className="h-[2px] w-12 bg-sea-500" />
                   <span className="uppercase tracking-[0.4em] text-xs font-black text-sea-500">Kontakt</span>
                 </div>
-                <h2 className="font-serif text-6xl md:text-8xl font-bold mb-16 text-white leading-tight">
+                <h2 className="font-serif text-5xl sm:text-6xl md:text-8xl font-bold mb-12 md:mb-16 text-white leading-tight">
                   Zadzwoń do <br/>
                   <span className="italic text-sea-500">Kapitana</span>
                 </h2>
                 
-                <div className="space-y-12">
-                  <motion.div whileHover={{ x: 15 }} className="flex gap-8 items-start group">
-                    <div className="p-5 bg-white/5 rounded-3xl group-hover:bg-sea-500/20 transition-colors border border-white/5">
-                      <Phone className="w-10 h-10 text-sea-500" />
+                <div className="space-y-10 md:space-y-12">
+                  <motion.div whileHover={{ x: 15 }} className="flex gap-6 md:gap-8 items-start group">
+                    <div className="p-4 md:p-5 bg-white/5 rounded-3xl group-hover:bg-sea-500/20 transition-colors border border-white/5">
+                      <Phone className="w-8 h-8 md:w-10 md:h-10 text-sea-500" />
                     </div>
-                    <div>
-                      <h3 className="text-xs uppercase tracking-widest font-black text-white/40 mb-2">Telefon Rezerwacje</h3>
-                      <a href="tel:886554290" className="text-4xl md:text-5xl font-black text-white tracking-tighter hover:text-sea-500 transition-colors">
+                    <div className="flex-1">
+                      <h3 className="text-[10px] md:text-xs uppercase tracking-widest font-black text-white/40 mb-2">Telefon Rezerwacje</h3>
+                      <a href="tel:886554290" className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tighter hover:text-sea-500 transition-colors block">
                         886 554 290
                       </a>
                     </div>
                   </motion.div>
 
-                  <motion.div whileHover={{ x: 15 }} className="flex gap-8 items-start group">
-                    <div className="p-5 bg-white/5 rounded-3xl group-hover:bg-sea-500/20 transition-colors border border-white/5">
-                      <MapPin className="w-10 h-10 text-sea-500" />
+                  <motion.div whileHover={{ x: 15 }} className="flex gap-6 md:gap-8 items-start group">
+                    <div className="p-4 md:p-5 bg-white/5 rounded-3xl group-hover:bg-sea-500/20 transition-colors border border-white/5">
+                      <MapPin className="w-8 h-8 md:w-10 md:h-10 text-sea-500" />
                     </div>
-                    <div>
-                      <h3 className="text-xs uppercase tracking-widest font-black text-white/40 mb-2">Nasza Baza</h3>
-                      <p className="text-3xl font-bold text-white tracking-tight">
+                    <div className="flex-1">
+                      <h3 className="text-[10px] md:text-xs uppercase tracking-widest font-black text-white/40 mb-2">Nasza Baza</h3>
+                      <p className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                         Inowłódz, Polska
                       </p>
                     </div>
                   </motion.div>
 
-                  <motion.div whileHover={{ x: 15 }} className="flex gap-8 items-start group">
-                    <div className="p-5 bg-white/5 rounded-3xl group-hover:bg-[#1877F2]/20 transition-colors border border-white/5">
-                      <Facebook className="w-10 h-10 text-[#1877F2]" />
+                  <motion.div whileHover={{ x: 15 }} className="flex gap-6 md:gap-8 items-start group">
+                    <div className="p-4 md:p-5 bg-white/5 rounded-3xl group-hover:bg-[#1877F2]/20 transition-colors border border-white/5">
+                      <Facebook className="w-8 h-8 md:w-10 md:h-10 text-[#1877F2]" />
                     </div>
-                    <div>
-                      <h3 className="text-xs uppercase tracking-widest font-black text-white/40 mb-4">Media Społecznościowe</h3>
+                    <div className="flex-1">
+                      <h3 className="text-[10px] md:text-xs uppercase tracking-widest font-black text-white/40 mb-4">Media Społecznościowe</h3>
                       <a 
                         href={FB_LINK}
                         target="_blank"
-                        className="inline-block py-3 px-8 rounded-full border border-white/10 font-bold hover:bg-white hover:text-marine-900 transition-all text-sm uppercase tracking-widest text-white hover:text-marine-900"
+                        rel="noreferrer"
+                        className="inline-block py-2.5 px-6 sm:py-3 sm:px-8 rounded-full border border-white/10 font-bold hover:bg-white hover:text-marine-900 transition-all text-xs sm:text-sm uppercase tracking-widest text-white"
                       >
                         Bar Sandacz na Facebooku
                       </a>
@@ -494,13 +490,13 @@ export default function App() {
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="h-[650px] bg-white/5 rounded-[4rem] overflow-hidden border border-white/10 shadow-3xl relative"
+                className="h-[400px] md:h-[650px] bg-white/5 rounded-[2.5rem] md:rounded-[4rem] overflow-hidden border border-white/10 shadow-3xl relative"
               >
                 <iframe 
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2179.913506945084!2d20.2207904!3d51.5264627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4710be28c9f041ff%3A0x6fb0c8fe484ff26a!2zU21hxbxhbG5pYSByeWIgIkJhciBTYW5kYWN6Ig!5e0!3m2!1spl!2spl!4v1716121800000!5m2!1spl!2spl"
                   width="100%"
                   height="100%"
-                  style={{ border: 0, filter: 'grayscale(0.5) invert(0.9) contrast(1.1) brightness(0.9)' }}
+                  style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -514,7 +510,7 @@ export default function App() {
 
       <footer className="py-20 bg-marine-900 border-t border-white/5 text-center px-4 relative z-10 overflow-hidden">
         <Fish className="w-12 h-12 text-sea-500 mx-auto mb-8 animate-bounce" />
-        <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-white/40 font-bold uppercase tracking-[0.2em] text-xs mb-12">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-white/40 font-bold uppercase tracking-[0.2em] text-sm mb-12">
           <a href="#galeria" className="hover:text-sea-500 transition-colors">Galeria</a>
           <a href="#godziny" className="hover:text-sea-500 transition-colors">Godziny Otwarcia</a>
           <a href="#opinie" className="hover:text-sea-500 transition-colors">Opinie Gości</a>
