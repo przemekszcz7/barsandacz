@@ -18,7 +18,10 @@ import {
   Star, 
   ChevronRight,
   Menu,
-  X
+  X,
+  Waves,
+  Ship,
+  Anchor
 } from "lucide-react";
 import { useState } from "react";
 
@@ -68,29 +71,34 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#FDFCF8] text-[#1A1A1A] font-sans selection:bg-[#E3D5C5] overflow-x-hidden">
+    <div className="min-h-screen bg-sand-100 text-marine-900 font-sans selection:bg-sea-100 overflow-x-hidden">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-[#FDFCF8]/80 backdrop-blur-md border-b border-[#E3D5C5]">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <nav className="fixed top-0 w-full z-50 bg-sand-100/90 backdrop-blur-md border-b border-sand-200">
+        <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-2"
+            className="flex items-center gap-3"
           >
-            <Fish className="text-[#2D5A27] w-8 h-8" />
-            <span className="font-serif text-xl font-bold tracking-tight">Bar Sandacz</span>
+            <div className="p-2 bg-marine-900 rounded-lg">
+              <Anchor className="text-white w-6 h-6" />
+            </div>
+            <div className="flex flex-col leading-tight">
+              <span className="font-serif text-xl font-bold tracking-tight text-marine-900">Bar Sandacz</span>
+              <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-sea-500">Smażalnia Ryb</span>
+            </div>
           </motion.div>
           
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium uppercase tracking-wider">
+          <div className="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-widest text-marine-900">
             {["Galeria", "Godziny", "Opinie", "Kontakt"].map((item) => (
               <motion.a 
                 key={item}
                 href={`#${item.toLowerCase()}`} 
                 whileHover={{ y: -2 }}
-                className="hover:text-[#2D5A27] transition-colors relative group"
+                className="hover:text-sea-500 transition-colors relative group"
               >
                 {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#2D5A27] transition-all group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sea-500 transition-all group-hover:w-full" />
               </motion.a>
             ))}
           </div>
@@ -106,13 +114,13 @@ export default function App() {
               rel="noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-[#1877F2] text-white px-4 py-2 rounded-full flex items-center gap-2 text-sm font-semibold hover:shadow-lg transition-shadow"
+              className="bg-[#1877F2] text-white px-6 py-2.5 rounded-full flex items-center gap-2 text-sm font-bold shadow-lg hover:shadow-[#1877F2]/30 transition-shadow"
             >
               <Facebook className="w-4 h-4" /> Facebook
             </motion.a>
           </motion.div>
 
-          <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <button className="md:hidden text-marine-900" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X /> : <Menu />}
           </button>
         </div>
@@ -124,18 +132,24 @@ export default function App() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="md:hidden bg-[#FDFCF8] border-b border-[#E3D5C5] px-4 py-6 flex flex-col gap-4 text-center overflow-hidden"
+              className="md:hidden bg-sand-100 border-b border-sand-200 px-4 py-8 flex flex-col gap-6 text-center overflow-hidden"
             >
-              <a href="#galeria" onClick={() => setIsMenuOpen(false)} className="py-2 text-lg font-medium">Galeria</a>
-              <a href="#godziny" onClick={() => setIsMenuOpen(false)} className="py-2 text-lg font-medium">Godziny</a>
-              <a href="#opinie" onClick={() => setIsMenuOpen(false)} className="py-2 text-lg font-medium">Opinie</a>
-              <a href="#kontakt" onClick={() => setIsMenuOpen(false)} className="py-2 text-lg font-medium">Kontakt</a>
+              {["Galeria", "Godziny", "Opinie", "Kontakt"].map((item) => (
+                <a 
+                  key={item} 
+                  href={`#${item.toLowerCase()}`} 
+                  onClick={() => setIsMenuOpen(false)} 
+                  className="text-xl font-bold uppercase tracking-widest text-marine-900"
+                >
+                  {item}
+                </a>
+              ))}
               <a 
                 href={FB_LINK}
                 target="_blank"
-                className="bg-[#1877F2] text-white py-3 rounded-xl flex items-center justify-center gap-2 font-semibold"
+                className="bg-[#1877F2] text-white py-4 rounded-2xl flex items-center justify-center gap-2 font-bold shadow-xl shadow-[#1877F2]/20 text-marine-900"
               >
-                <Facebook className="w-5 h-5" /> Facebook
+                <Facebook className="w-5 h-5 text-white" /> Facebook
               </a>
             </motion.div>
           )}
@@ -144,58 +158,78 @@ export default function App() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+        <section className="relative h-[100vh] flex items-center justify-center overflow-hidden">
           <motion.div 
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
-            transition={{ duration: 2 }}
+            transition={{ duration: 3 }}
             className="absolute inset-0"
           >
             <img 
               src={IMAGES[1]} 
-              className="w-full h-full object-cover grayscale-[0.2] brightness-50"
+              className="w-full h-full object-cover brightness-[0.4]"
               alt="Bar Sandacz Inowłódz"
             />
           </motion.div>
           
-          <div className="relative z-10 text-white text-center px-4">
+          {/* Animated Waves Background Overlay */}
+          <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] transform rotate-180">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-[200%] h-[100px] text-sand-100 fill-current opacity-20 animate-wave-slow">
+              <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V46.35C50.7,56.46,105,71.21,158.85,73.49,211.39,75.7,263.39,64.24,321.39,56.44Z"></path>
+            </svg>
+          </div>
+
+          <div className="relative z-10 text-white text-center px-4 max-w-4xl">
             <motion.div
               variants={staggerContainer}
               initial="initial"
               animate="animate"
             >
-              <motion.h4 
-                variants={fadeInUp}
-                className="uppercase tracking-[0.3em] text-sm font-semibold mb-4 opacity-80"
-              >
-                Zapraszamy do Inowłodza
-              </motion.h4>
-              <motion.h1 
-                variants={fadeInUp}
-                className="font-serif text-5xl md:text-8xl font-bold mb-8 leading-tight py-2"
-              >
-                Smażalnia Ryb<br/>
-                <span className="italic text-[#E3D5C5]">Bar Sandacz</span>
-              </motion.h1>
               <motion.div 
                 variants={fadeInUp}
-                className="flex flex-col sm:flex-row items-center justify-center gap-4"
+                className="flex items-center justify-center gap-2 mb-6"
+              >
+                <Waves className="text-sea-500 w-6 h-6 animate-pulse" />
+                <h4 className="uppercase tracking-[0.4em] text-xs font-black text-sea-500">
+                  Autentyczna Kuchnia Rybna
+                </h4>
+                <Waves className="text-sea-500 w-6 h-6 animate-pulse" />
+              </motion.div>
+              
+              <motion.h1 
+                variants={fadeInUp}
+                className="font-serif text-6xl md:text-[9rem] font-bold mb-8 leading-[0.9] py-4"
+              >
+                Morski Klimat <br/>
+                <span className="italic text-sand-200">nad Pilicą</span>
+              </motion.h1>
+
+              <motion.p 
+                variants={fadeInUp}
+                className="text-lg md:text-xl text-white/80 mb-12 max-w-2xl mx-auto font-medium"
+              >
+                Zapraszamy do Inowłodza na najświeższą rybę w okolicy. Rodzinna atmosfera i smak, który zapamiętasz na długo.
+              </motion.p>
+
+              <motion.div 
+                variants={fadeInUp}
+                className="flex flex-col sm:flex-row items-center justify-center gap-6"
               >
                 <motion.a 
                   href="#godziny"
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-[#FDFCF8] text-[#1A1A1A] px-8 py-4 rounded-full font-bold text-lg shadow-xl"
+                  className="bg-marine-900 text-white px-10 py-5 rounded-full font-black text-sm uppercase tracking-widest shadow-2xl border border-white/10"
                 >
-                  Zobacz Godziny
+                  Odwiedź nas dziś
                 </motion.a>
                 <motion.a 
                   href="tel:886554290"
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
                   whileTap={{ scale: 0.95 }}
-                  className="backdrop-blur-md bg-white/10 border border-white/20 px-8 py-4 rounded-full font-bold text-lg transition-all flex items-center gap-2"
+                  className="backdrop-blur-xl bg-white/10 border border-white/20 px-10 py-5 rounded-full font-black text-sm uppercase tracking-widest flex items-center gap-3 text-white"
                 >
-                  <Phone className="w-5 h-5" /> 886 554 290
+                  <Phone className="w-4 h-4" /> 886 554 290
                 </motion.a>
               </motion.div>
             </motion.div>
@@ -203,234 +237,270 @@ export default function App() {
         </section>
 
         {/* Gallery Section */}
-        <section id="galeria" className="py-24 max-w-7xl mx-auto px-4">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="mb-16 text-center"
-          >
-            <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4">Poczuj smak świeżej ryby</h2>
+        <section id="galeria" className="py-32 max-w-7xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
             <motion.div 
-              initial={{ width: 0 }}
-              whileInView={{ width: 96 }}
-              transition={{ duration: 1, delay: 0.5 }}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="h-1 bg-[#2D5A27] mx-auto"
-            />
-          </motion.div>
+              className="max-w-xl"
+            >
+              <h2 className="font-serif text-5xl md:text-7xl font-bold mb-6 text-marine-900 leading-tight">
+                Złapane w sieć <br/>
+                <span className="text-sea-500 italic">naszego menu</span>
+              </h2>
+              <p className="text-xl text-marine-700/70 font-medium">
+                Poczuj zapach świeżości. Każde danie przygotowujemy z pasją i dbałością o każdy detal.
+              </p>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-marine-900 p-8 rounded-3xl text-white flex items-center gap-4 shadow-2xl rotate-3"
+            >
+              <Ship className="w-12 h-12 text-sea-500" />
+              <div>
+                <p className="text-xs uppercase tracking-widest font-black text-sea-500 mb-1">Potwierdzona jakość</p>
+                <p className="text-lg font-bold text-white">Zawsze świeża dostawa</p>
+              </div>
+            </motion.div>
+          </div>
 
           <motion.div 
             variants={staggerContainer}
             initial="initial"
             whileInView="animate"
-            viewport={{ once: true, margin: "-50px" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
           >
             {IMAGES.map((src, i) => (
               <motion.div 
                 key={i}
                 variants={itemScale}
-                whileHover={{ y: -10 }}
-                className="group relative aspect-[3/4] overflow-hidden rounded-3xl shadow-xl bg-gray-100"
+                whileHover={{ y: -15, rotate: i % 2 === 0 ? 2 : -2 }}
+                className="group relative aspect-[3/4] overflow-hidden rounded-[2.5rem] shadow-2xl bg-sand-200 border-8 border-white"
               >
                 <img 
                   src={src} 
                   alt={`Smażalnia Bar Sandacz - Zdjęcie ${i + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-125"
                 />
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-marine-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                  <Anchor className="text-white w-12 h-12 drop-shadow-lg" />
+                </div>
               </motion.div>
             ))}
           </motion.div>
         </section>
 
-        {/* Hours Section */}
-        <section id="godziny" className="py-24 bg-[#F5F2ED]">
-          <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-16">
+        {/* Hours & Atmosphere Section */}
+        <section id="godziny" className="py-32 bg-marine-900 text-white relative overflow-hidden">
+          {/* Subtle Background Pattern */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#4A90E2 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+          
+          <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-24 relative z-10">
             <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1 }}
               viewport={{ once: true }}
-              className="lg:w-1/2"
+              className="lg:w-1/2 relative"
             >
               <img 
                 src={IMAGES[2]} 
-                className="rounded-[3rem] w-full h-[600px] object-cover shadow-2xl"
+                className="rounded-[4rem] w-full h-[700px] object-cover shadow-3xl border-[20px] border-white/5"
                 alt="Wystrój Bar Sandacz"
               />
+              <motion.div 
+                animate={{ y: [0, -20, 0] }}
+                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+                className="absolute -bottom-10 -right-10 bg-sea-500 p-10 rounded-full shadow-2xl border-8 border-marine-900"
+              >
+                <Waves className="w-16 h-16 text-white" />
+              </motion.div>
             </motion.div>
+            
             <motion.div 
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
               className="lg:w-1/2"
             >
-              <div className="max-w-md">
-                <div className="flex items-center gap-3 text-[#2D5A27] mb-6">
-                  <motion.div
-                    animate={{ rotate: [0, 10, -10, 0] }}
-                    transition={{ repeat: Infinity, duration: 4 }}
-                  >
-                    <Clock className="w-10 h-10" />
-                  </motion.div>
-                  <span className="uppercase tracking-widest font-bold text-sm">Witamy wszystkich gości</span>
-                </div>
-                <h2 className="font-serif text-4xl md:text-5xl font-bold mb-10 text-gray-900 italic">Godziny Otwarcia</h2>
+              <div className="max-w-xl">
+                <h2 className="font-serif text-5xl md:text-7xl font-bold mb-12 text-white">
+                  Port Otwarty <br/>
+                  <span className="text-sea-500 italic">Dla Ciebie</span>
+                </h2>
                 
                 <motion.div 
                   variants={staggerContainer}
                   initial="initial"
                   whileInView="animate"
                   viewport={{ once: true }}
-                  className="space-y-4"
+                  className="space-y-6"
                 >
                   {hours.map((item, idx) => (
                     <motion.div 
                       key={idx} 
                       variants={fadeInUp}
-                      className={`flex justify-between items-center py-4 border-b border-[#E3D5C5]/50 ${item.closed ? 'text-gray-400 opacity-60' : ''}`}
+                      className={`flex justify-between items-center py-5 border-b border-white/10 ${item.closed ? 'opacity-30' : ''}`}
                     >
-                      <span className="text-xl font-medium">{item.day}</span>
-                      <span className={`text-xl font-bold ${!item.closed ? 'text-[#2D5A27]' : ''}`}>
-                        {item.time}
-                      </span>
+                      <span className="text-xl font-bold uppercase tracking-[0.2em]">{item.day}</span>
+                      <div className="flex items-center gap-4">
+                        {!item.closed && <Clock className="w-5 h-5 text-sea-500" />}
+                        <span className={`text-2xl font-black ${!item.closed ? 'text-sea-500' : 'text-white'}`}>
+                          {item.time}
+                        </span>
+                      </div>
                     </motion.div>
                   ))}
                 </motion.div>
+                
+                <div className="mt-16 p-8 bg-white/5 rounded-3xl border border-white/10 flex items-start gap-6">
+                  <div className="bg-sea-500/20 p-4 rounded-xl">
+                    <MapPin className="text-sea-500 w-8 h-8" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-xl mb-2 text-white">Nasza Przystań</h4>
+                    <p className="text-white/60 leading-relaxed text-lg">
+                      Inowłódz, Polska.<br/>
+                      Tuż nad brzegiem Pilicy, w sercu natury.
+                    </p>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
         </section>
 
-        {/* Reviews CTA */}
-        <section id="opinie" className="py-32 bg-white relative overflow-hidden">
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.05 }}
-            className="absolute -top-20 -right-20 pointer-events-none"
-          >
-            <Star className="w-96 h-96 fill-current text-black" />
-          </motion.div>
-
-          <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+        {/* Reviews Section */}
+        <section id="opinie" className="py-40 bg-sand-100 relative overflow-hidden">
+          <div className="max-w-5xl mx-auto px-4 text-center">
             <motion.div 
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="flex justify-center gap-1 mb-6"
+              className="flex justify-center gap-3 mb-10"
             >
               {[...Array(5)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ rotate: -30 }}
-                  whileInView={{ rotate: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                >
-                  <Star className="w-8 h-8 fill-[#FFB800] text-[#FFB800]" />
-                </motion.div>
+                <Star key={i} className="w-12 h-12 fill-[#FFB800] text-[#FFB800] drop-shadow-xl" />
               ))}
             </motion.div>
+            
             <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="font-serif text-4xl md:text-6xl font-bold mb-8 italic"
+              className="font-serif text-5xl md:text-8xl font-bold mb-10 text-marine-900 leading-tight italic"
             >
-              Świetne jedzenie, świetne opinie.
+              "Najlepszy Sandacz <br/>jakiego jadłem!"
             </motion.h2>
+            
             <motion.p 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto"
+              className="text-2xl text-marine-700/80 mb-16 max-w-3xl mx-auto font-medium italic leading-relaxed"
             >
-              Nasi goście doceniają świeżą rybę, miłą obsługę i domowy klimat. Przeczytaj wszystkie opinie na naszym Facebooku lub zostaw własną!
+              "Wspaniałe miejsce z duszą. Ryba świeża, chrupiąca i idealnie doprawiona. Atmosfera sprawia, że czujesz się jak u starych dobrych znajomych. Polecam każdemu, kto odwiedza Inowłódz!"
             </motion.p>
+            
             <motion.a 
               href={REVIEWS_LINK}
               target="_blank"
               rel="noreferrer"
-              whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1)" }}
+              whileHover={{ scale: 1.05, y: -5 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-3 bg-[#1A1A1A] text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-black transition-all group shadow-xl"
+              className="inline-flex items-center gap-4 bg-marine-900 text-white px-12 py-6 rounded-full font-black text-lg uppercase tracking-widest hover:bg-marine-800 transition-all shadow-3xl text-white"
             >
-              Zobacz Opinie na Facebooku
-              <ChevronRight className="w-6 h-6 transition-transform group-hover:translate-x-1" />
+              Dołącz do załogi na Facebooku
+              <ChevronRight className="w-6 h-6 text-sea-500" />
             </motion.a>
           </div>
         </section>
 
-        {/* Contact/Location */}
-        <section id="kontakt" className="py-24 bg-[#1A1A1A] text-white overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        {/* Contact/Map Section */}
+        <section id="kontakt" className="pt-24 pb-48 bg-marine-900 text-white relative overflow-hidden">
+          {/* Animated Wave Background Top */}
+          <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0]">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-[200%] h-[120px] text-sand-100 fill-current animate-wave">
+              <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V46.35C50.7,56.46,105,71.21,158.85,73.49,211.39,75.7,263.39,64.24,321.39,56.44Z"></path>
+            </svg>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 mt-32 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
               <motion.div 
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <h2 className="font-serif text-4xl md:text-5xl font-bold mb-12">Odwiedź nas</h2>
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="h-[2px] w-12 bg-sea-500" />
+                  <span className="uppercase tracking-[0.4em] text-xs font-black text-sea-500">Kontakt</span>
+                </div>
+                <h2 className="font-serif text-6xl md:text-8xl font-bold mb-16 text-white leading-tight">
+                  Zadzwoń do <br/>
+                  <span className="italic text-sea-500">Kapitana</span>
+                </h2>
                 
-                <div className="space-y-10">
-                  <motion.div 
-                    whileHover={{ x: 10 }}
-                    className="flex gap-6 items-start"
-                  >
-                    <div className="bg-white/10 p-4 rounded-2xl">
-                      <MapPin className="w-8 h-8 text-[#E3D5C5]" />
+                <div className="space-y-12">
+                  <motion.div whileHover={{ x: 15 }} className="flex gap-8 items-start group">
+                    <div className="p-5 bg-white/5 rounded-3xl group-hover:bg-sea-500/20 transition-colors border border-white/5">
+                      <Phone className="w-10 h-10 text-sea-500" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold mb-2 text-[#E3D5C5]">Lokalizacja</h3>
-                      <p className="text-xl text-gray-400">Inowłódz, Polska</p>
+                      <h3 className="text-xs uppercase tracking-widest font-black text-white/40 mb-2">Telefon Rezerwacje</h3>
+                      <a href="tel:886554290" className="text-4xl md:text-5xl font-black text-white tracking-tighter hover:text-sea-500 transition-colors">
+                        886 554 290
+                      </a>
                     </div>
                   </motion.div>
 
-                  <motion.div 
-                    whileHover={{ x: 10 }}
-                    className="flex gap-6 items-start"
-                  >
-                    <div className="bg-white/10 p-4 rounded-2xl">
-                      <Phone className="w-8 h-8 text-[#E3D5C5]" />
+                  <motion.div whileHover={{ x: 15 }} className="flex gap-8 items-start group">
+                    <div className="p-5 bg-white/5 rounded-3xl group-hover:bg-sea-500/20 transition-colors border border-white/5">
+                      <MapPin className="w-10 h-10 text-sea-500" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold mb-2 text-[#E3D5C5]">Telefon</h3>
-                      <p className="text-3xl font-bold text-white tracking-widest mt-1 hover:text-[#E3D5C5] transition-colors">
-                        <a href="tel:886554290">886 554 290</a>
+                      <h3 className="text-xs uppercase tracking-widest font-black text-white/40 mb-2">Nasza Baza</h3>
+                      <p className="text-3xl font-bold text-white tracking-tight">
+                        Inowłódz, Polska
                       </p>
                     </div>
                   </motion.div>
-                </div>
 
-                <div className="mt-16">
-                  <motion.a 
-                    href={FB_LINK}
-                    target="_blank"
-                    whileHover={{ x: 10 }}
-                    className="flex items-center gap-4 text-[#E3D5C5] hover:text-white transition-colors group"
-                  >
-                    <div className="bg-white/10 p-3 rounded-full group-hover:bg-[#1877F2] transition-colors">
-                      <Facebook className="w-6 h-6" />
+                  <motion.div whileHover={{ x: 15 }} className="flex gap-8 items-start group">
+                    <div className="p-5 bg-white/5 rounded-3xl group-hover:bg-[#1877F2]/20 transition-colors border border-white/5">
+                      <Facebook className="w-10 h-10 text-[#1877F2]" />
                     </div>
-                    <span className="text-lg font-semibold border-b border-[#E3D5C5]/30 pb-1">Śledź nas na Facebooku</span>
-                  </motion.a>
+                    <div>
+                      <h3 className="text-xs uppercase tracking-widest font-black text-white/40 mb-4">Media Społecznościowe</h3>
+                      <a 
+                        href={FB_LINK}
+                        target="_blank"
+                        className="inline-block py-3 px-8 rounded-full border border-white/10 font-bold hover:bg-white hover:text-marine-900 transition-all text-sm uppercase tracking-widest text-white hover:text-marine-900"
+                      >
+                        Bar Sandacz na Facebooku
+                      </a>
+                    </div>
+                  </motion.div>
                 </div>
               </motion.div>
               
               <motion.div 
-                initial={{ opacity: 0, x: 50, rotate: 2 }}
-                whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="h-[500px] bg-white/5 rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl relative"
+                className="h-[650px] bg-white/5 rounded-[4rem] overflow-hidden border border-white/10 shadow-3xl relative"
               >
                 <iframe 
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2179.913506945084!2d20.2207904!3d51.5264627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4710be28c9f041ff%3A0x6fb0c8fe484ff26a!2zU21hxbxhbG5pYSByeWIgIkJhciBTYW5kYWN6Ig!5e0!3m2!1spl!2spl!4v1716121800000!5m2!1spl!2spl"
                   width="100%"
                   height="100%"
-                  style={{ border: 0 }}
+                  style={{ border: 0, filter: 'grayscale(0.5) invert(0.9) contrast(1.1) brightness(0.9)' }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -442,14 +512,18 @@ export default function App() {
         </section>
       </main>
 
-      <footer className="py-12 border-t border-[#E3D5C5]/30 text-center text-gray-500 text-sm">
-        <motion.p 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          &copy; {new Date().getFullYear()} Smażalnia Ryb Bar Sandacz. Wszelkie prawa zastrzeżone.
-        </motion.p>
+      <footer className="py-20 bg-marine-900 border-t border-white/5 text-center px-4 relative z-10 overflow-hidden">
+        <Fish className="w-12 h-12 text-sea-500 mx-auto mb-8 animate-bounce" />
+        <div className="flex flex-col md:flex-row items-center justify-center gap-12 text-white/40 font-bold uppercase tracking-[0.2em] text-xs mb-12">
+          <a href="#galeria" className="hover:text-sea-500 transition-colors">Galeria</a>
+          <a href="#godziny" className="hover:text-sea-500 transition-colors">Godziny Otwarcia</a>
+          <a href="#opinie" className="hover:text-sea-500 transition-colors">Opinie Gości</a>
+          <a href="#kontakt" className="hover:text-sea-500 transition-colors">Zadzwoń do nas</a>
+        </div>
+        <p className="text-white/20 text-xs font-medium max-w-sm mx-auto leading-relaxed uppercase tracking-widest">
+          &copy; {new Date().getFullYear()} Smażalnia Ryb Bar Sandacz.<br/>
+          Strona wykonana z nautical-klimatem.
+        </p>
       </footer>
     </div>
   );
