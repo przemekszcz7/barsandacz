@@ -1,0 +1,6 @@
+{
+  "name": "Smażalnia Ryb Bar Sandacz",
+  "description": "Rodzinna smażalnia ryb w sercu Inowłodza. Świeże ryby, domowa atmosfera i najlepsze opinie.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
